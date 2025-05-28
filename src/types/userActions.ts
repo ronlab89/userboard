@@ -5,3 +5,12 @@ export interface GetUserActions {
   setUsers: (data: Users | null) => void;
   setTotalUsers: (total: number) => void;
 }
+
+export interface CreateUserProps {
+  setLoading: (key: string, value: boolean) => void;
+  name: string;
+  surname: string;
+  email: string;
+  users: Users | null;
+  setUsers: (data: Users | null) => void;
+}

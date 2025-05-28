@@ -1,5 +1,5 @@
 import type { User } from "@/types/user";
-import type { GetUserActions } from "@/types/userActions";
+import type { CreateUserProps, GetUserActions } from "@/types/userActions";
 import { notify } from "@/utils/alertNotify";
 import axios from "axios";
 
@@ -30,4 +30,33 @@ const getUsers = async ({
   }
 };
 
-export { getUsers };
+const createUser = async ({
+  setLoading,
+  name,
+  surname,
+  email,
+  users,
+  setUsers,
+}: CreateUserProps) => {
+  try {
+    setLoading("createUser", true);
+    const newUser = {
+      id: (users ? users.length : 0) + 1 * 1000,
+      firstName: name,
+      lastName: surname,
+      email: email,
+      status: true,
+      birthday: "",
+      skills: [],
+      avatar: [],
+    };
+    setUsers([...(users ?? []), newUser]);
+    notify("success", "Usuario creado correctamente");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading("createUser", false);
+  }
+};
+
+export { getUsers, createUser };

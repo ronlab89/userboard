@@ -8,6 +8,7 @@
  * Structure:
  * - <Navbar />: Main navigation header.
  * - <Users />: Main section displaying user table and actions.
+ * - <Modal />: Modal component for adding new users and deleting existing ones.
  * - <Toaster />: Global toast notification system.
  * - <Loader />: Conditionally displayed when any user-related async action is in progress.
  *
@@ -21,10 +22,10 @@ import { useLoadingStore } from "@/store/loading.store";
 import Navbar from "@/components/navigation/Navbar";
 import Users from "@/components/users/Users";
 import { Toaster } from "sonner";
-import { useUserStore } from "./store/user.store";
 
-// Lazy load loader component for better performance
+// Lazy load loader and modal components for better performance
 const Loader = lazy(() => import("@/components/commons/Loader"));
+const Modal = lazy(() => import("./components/commons/Modal"));
 
 function App() {
   const loading = useLoadingStore((state) => state.loading);
@@ -42,6 +43,10 @@ function App() {
       <section className="w-full h-full p-10">
         <Users />
       </section>
+      {/* Modal */}
+      <Suspense fallback={""}>
+        <Modal />
+      </Suspense>
       {/* Notification system */}
       <Suspense
         fallback={<span className="sr-only">Cargando notificaciones…</span>}

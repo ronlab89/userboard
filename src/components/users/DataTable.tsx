@@ -1,5 +1,6 @@
 import RemoveUser from "@/icons/RemoveUser";
 import { usePaginationStore } from "@/store/pagination.store";
+import { useToggleStore } from "@/store/toogle.store";
 import { useUserStore } from "@/store/user.store";
 import { useEffect } from "react";
 
@@ -10,6 +11,9 @@ const DataTable = () => {
   const totalUsers = usePaginationStore((state) => state.totalUsers);
   const totalPages = usePaginationStore((state) => state.totalPages);
   const setTotalPages = usePaginationStore((state) => state.setTotalPages);
+  const setToggleModal = useToggleStore((state) => state.setToggleModal);
+  const setModalType = useToggleStore((state) => state.setModalType);
+  const setData = useToggleStore((state) => state.setData);
 
   const paginatedUsers = users?.slice(
     (currentPage - 1) * rowsPerPage,
@@ -26,13 +30,13 @@ const DataTable = () => {
         <thead className="text-xs text-userboard-accent uppercase bg-userboard-bgdark/90 dark:bg-userboard-bglight/90">
           <tr>
             <th scope="col" className="px-6 py-3">
-              First Name
+              Nombre
             </th>
             <th scope="col" className="px-6 py-3">
-              Last Name
+              Apellido
             </th>
             <th scope="col" className="px-6 py-3">
-              Email
+              Correo electrónico
             </th>
             <th scope="col" className="px-6 py-3">
               <span className="sr-only">Actions</span>
@@ -54,7 +58,13 @@ const DataTable = () => {
               <td className="px-6 py-4">{user?.lastName}</td>
               <td className="px-6 py-4">{user?.email}</td>
               <td className="px-6 py-4 text-right">
-                <span>
+                <span
+                  onClick={() => {
+                    setToggleModal(true);
+                    setModalType("delete-user");
+                    setData({ ...user });
+                  }}
+                >
                   <RemoveUser
                     width={24}
                     height={24}

@@ -1,3 +1,4 @@
+import type { User } from "@/types/user";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -10,7 +11,7 @@ interface TooltipWithId {
 interface ToggleState {
   toggleModal: boolean;
   modalType: string | null;
-  data: Record<string, unknown>;
+  data: Record<string, unknown> | User;
   tooltip: TooltipWithId;
 
   // Métodos
