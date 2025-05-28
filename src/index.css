@@ -2,6 +2,16 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+    --color-userboard-bglight: #f3f4f6;
+    --color-userboard-bgdark: #101828;
+    --color-userboard-textlight: #101828;
+    --color-userboard-textdark: #f3f4f6;
+    --color-userboard-accent: #7f22fe;
+    --color-userboard-borderlight: #d1d5dc;
+    --color-userboard-borderdark: #364153;
+}
+
 .funnel-sans {
   font-family: "Funnel Sans", sans-serif;
   font-optical-sizing: auto;

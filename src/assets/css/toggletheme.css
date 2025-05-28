@@ -2,12 +2,12 @@
   .app {
     --transition-duration: 400ms;
     --bg: transparent;
-    --text: #FFC107;
+    --text: #f3f4f6;
   }
   
   .app.dark {
     --bg: transparent;
-    --text: #000;
+    --text: #101828;
   }
   
   .app {
