@@ -1,5 +1,5 @@
 function App() {
-  return <main>userboard</main>;
+  return <main className="">userboard</main>;
 }
 
 export default App;
