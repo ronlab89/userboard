@@ -1,7 +1,24 @@
+/* 
+ * Main CSS File
+ *
+ * Imports and defines global styles and design tokens for the application.
+ *
+ * Includes:
+ * - Google Fonts: Funnel Sans in multiple weights and styles
+ * - Tailwind CSS: Core utility framework
+ * - Custom dark variant: Enables targeting dark mode styling
+ * - Theme variables: CSS custom properties for consistent design tokens
+ * - Funnel Sans font utility class
+ */
+
+/* Import Funnel Sans font family from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Sans :ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+/* Import Tailwind CSS utilities */
 @import "tailwindcss";
+/* Define a custom variant for dark mode styling */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Theme variables for color customization */
 @theme {
     --color-userboard-bglight: #f3f4f6;
     --color-userboard-bgdark: #101828;
@@ -12,6 +29,7 @@
     --color-userboard-borderdark: #364153;
 }
 
+/* Funnel Sans font utility class */
 .funnel-sans {
   font-family: "Funnel Sans", sans-serif;
   font-optical-sizing: auto;

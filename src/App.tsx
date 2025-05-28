@@ -10,6 +10,7 @@ function App() {
       <header>
         <Navbar />
       </header>
+      <h1 className="sr-only">Gestión de usuarios simple y eficiente</h1>
     </main>
   );
 }
