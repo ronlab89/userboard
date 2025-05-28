@@ -1,17 +1,23 @@
+/**
+ * ToggleTheme Component
+ *
+ * This button toggles between light and dark themes.
+ * It checks the user's system preference and localStorage on initial render.
+ *
+ * Props:
+ * - position: Tailwind CSS class for positioning (e.g., "absolute", "fixed").
+ * - right: Tailwind CSS class for horizontal offset (e.g., "right-4").
+ * - top: Tailwind CSS class for vertical offset (e.g., "top-4").
+ */
+
 import { useEffect, useState } from "react";
 import "@/assets/css/toggletheme.css";
+import type { ToggleThemeProps } from "@/types/theme";
 
-const ToggleTheme = ({
-  position,
-  right,
-  top,
-}: {
-  position: string;
-  right: string;
-  top: string;
-}) => {
+const ToggleTheme = ({ position, right, top }: ToggleThemeProps) => {
   const [isDark, setIsDark] = useState<boolean>(false);
 
+  // On initial render, apply the dark theme based on localStorage or system preference
   useEffect(() => {
     if (
       localStorage.theme === "dark" ||
@@ -26,6 +32,7 @@ const ToggleTheme = ({
     }
   }, []);
 
+  // Toggles between dark and light themes and stores the preference in localStorage
   const handleDarkMode = () => {
     if (isDark) {
       document.documentElement.classList.remove("dark");
@@ -50,6 +57,7 @@ const ToggleTheme = ({
       } ${position} ${right} ${top} focus:outline-none focus:ring-0 focus:ring-red-500 rounded`}
       onClick={handleDarkMode}
     >
+      {/* Icon with overlapping sun and moon paths to visually indicate the current theme */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="30"
