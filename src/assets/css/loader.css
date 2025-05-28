@@ -1,0 +1,92 @@
+/* 
+  Root CSS variable for loader color, used throughout loader styles.
+*/
+:root {
+    --loader-color: #7f22fe;
+}
+
+/* 
+  Spinner loader styles:
+  - Circular shape with 48px diameter.
+  - Border top colored with loader color; right border transparent for spinner effect.
+  - Rotates infinitely with a 1 second linear animation.
+*/
+.loader-spinner {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 4px solid var(--loader-color);
+    border-right: 4px solid transparent;
+    animation: rotation 1s linear infinite;
+}
+/* 
+  Dark mode adjustment:
+  - Ensures the spinner's top border color remains consistent in dark theme.
+*/
+.dark .loader-spinner {
+    border-top: 4px solid var(--loader-color);
+}
+.loader-spinner:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border-bottom: 4px solid var(--loader-color);
+    border-left: 4px solid transparent;
+}
+.dark .loader-spinner:after {
+    border-bottom: 4px solid var(--loader-color);
+}
+
+/* 
+  Pulse loader styles using pseudo-elements (::before and ::after):
+  - Circular rings with 108px diameter and border using loader color.
+  - Positioned absolutely and centered.
+  - Animate scale and opacity infinitely over 2 seconds, staggered by 1 second.
+*/
+.loader-pulse::after, .loader-pulse::before {
+    animation: loader-pulse 2s linear infinite;
+    content: "";
+    border: 4px solid var(--loader-color);
+    width: 108px;
+    height: 108px;
+    position: absolute;
+    border-radius: 50%;
+}
+.loader-pulse::after {
+    opacity: 0;
+    animation-delay: 1s;
+}
+
+/* 
+  Rotation keyframes:
+  - Rotates element from 0 to 360 degrees continuously.
+*/
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+   }
+    100% {
+        transform: rotate(360deg);
+   }
+}
+
+/* 
+  Loader pulse keyframes:
+  - Scales circle from 0 to full size while fading out.
+  - Creates pulsing effect with opacity change.
+*/
+@keyframes loader-pulse {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
