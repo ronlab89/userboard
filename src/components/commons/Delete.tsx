@@ -1,8 +1,30 @@
+/**
+ * Delete
+ *
+ * A confirmation dialog component used to delete a user from the user list.
+ *
+ * Functionality:
+ * - Displays the selected user's information (`firstName`, `lastName`, `email`).
+ * - Confirms the deletion with a message and a button.
+ *
+ * Accessibility:
+ * - Uses `role="alertdialog"` and `aria-modal="true"` for screen reader support.
+ * - Includes `aria-labelledby` and `aria-live="polite"` to provide proper voice feedback.
+ *
+ * Components Used:
+ * - `Button`: Triggers the delete action.
+ *
+ * Example Usage:
+ * ```tsx
+ * <Delete />
+ * ```
+ */
+
+import type { User } from "@/types/user";
 import { useToggleStore } from "@/store/toogle.store";
-import Button from "./Button";
 import { useUserStore } from "@/store/user.store";
 import { notify } from "@/utils/alertNotify";
-import type { User } from "@/types/user";
+import Button from "@/components/commons/Button";
 
 const Delete = () => {
   const data = useToggleStore((state) => state.data) as User;

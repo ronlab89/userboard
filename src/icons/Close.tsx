@@ -1,3 +1,15 @@
+/**
+ * Close icon component rendered as an SVG.
+ *
+ * @param {number|string} width - The width of the icon.
+ * @param {number|string} height - The height of the icon.
+ * @param {string} styles - Additional CSS classes to style the icon.
+ *
+ * @accessibility
+ * Includes a <title> element with descriptive text "Cerrar" for screen readers.
+ * The SVG has role="img" and is labeled by the title for accessibility.
+ */
+
 import type { IconProps } from "@/types/icon";
 
 const Close = ({ width, height, styles }: IconProps) => {

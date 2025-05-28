@@ -1,3 +1,25 @@
+/**
+ * Zustand store for managing toggle states related to modals and tooltips.
+ *
+ * State properties:
+ * - toggleModal: boolean indicating if a modal is open or closed.
+ * - modalType: string or null representing the current modal type.
+ * - data: object holding arbitrary data associated with the modal or tooltip.
+ * - tooltip: object with:
+ *    - status: boolean indicating tooltip visibility.
+ *    - id: string or undefined representing the tooltip identifier.
+ *
+ * Actions (methods) to update state:
+ * - setToggleModal(bool): sets the modal open/close state.
+ * - setModalType(type): sets the modal type.
+ * - setData(info): sets the data associated with modal or tooltip.
+ * - setTooltip(bool, id): sets the tooltip visibility and its id.
+ * - resetToggles(): resets all toggles and data to initial default state.
+ *
+ * Persistence:
+ * - The store state is persisted under the key "toggle" using zustand's persist middleware.
+ */
+
 import type { User } from "@/types/user";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";

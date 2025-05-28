@@ -1,4 +1,29 @@
+/**
+ * Pagination
+ *
+ * A reusable pagination component that allows users to navigate through
+ * paginated data and control the number of rows per page.
+ *
+ * State is managed globally through a Zustand store.
+ *
+ * Functionality:
+ * - Select the number of rows per page.
+ * - Navigate between pages using "Anterior" and "Siguiente" buttons.
+ * - Displays current page and total pages.
+ *
+ * Accessibility:
+ * - Uses <label htmlFor="..."> for the rows-per-page selector.
+ * - Buttons are disabled appropriately to prevent invalid navigation.
+ * - Recommended to use `aria-live` to announce page changes.
+ *
+ * Example usage:
+ * ```tsx
+ * <Pagination />
+ * ```
+ */
+
 import { usePaginationStore } from "@/store/pagination.store";
+import { useEffect } from "react";
 
 const Pagination = () => {
   const currentPage = usePaginationStore((state) => state.currentPage);
@@ -8,6 +33,22 @@ const Pagination = () => {
   const setCurrentPage = usePaginationStore((state) => state.setCurrentPage);
   const setRowsPerPage = usePaginationStore((state) => state.setRowsPerPage);
   const setTotalPages = usePaginationStore((state) => state.setTotalPages);
+
+  useEffect(() => {
+    if (totalUsers > 0 && rowsPerPage > 0) {
+      const newTotalPages = Math.ceil(totalUsers / rowsPerPage);
+      if (newTotalPages !== totalPages) {
+        setTotalPages(newTotalPages);
+      }
+    }
+  }, [totalUsers, rowsPerPage, totalPages, setTotalPages]);
+
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages, setCurrentPage]);
+
   return (
     <div className="flex justify-between items-center mt-4 text-sm">
       <div>
@@ -18,9 +59,10 @@ const Pagination = () => {
           id="rowsPerPage"
           value={rowsPerPage}
           onChange={(e) => {
-            setRowsPerPage(Number(e.target.value));
+            const newRowsPerPage = Number(e.target.value);
+            setRowsPerPage(newRowsPerPage);
             setCurrentPage(1);
-            setTotalPages(Math.ceil(totalUsers / rowsPerPage));
+            setTotalPages(Math.ceil(totalUsers / newRowsPerPage));
           }}
           className="border rounded p-1 bg-white dark:bg-gray-800"
         >
@@ -35,11 +77,12 @@ const Pagination = () => {
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
           className="px-3 py-1 border rounded disabled:opacity-50"
+          aria-label="Página anterior"
         >
           Anterior
         </button>
 
-        <span>
+        <span aria-live="polite">
           Página {currentPage} de {totalPages}
         </span>
 
@@ -47,6 +90,7 @@ const Pagination = () => {
           onClick={() => setCurrentPage(currentPage + 1)}
           disabled={currentPage === totalPages}
           className="px-3 py-1 border rounded disabled:opacity-50"
+          aria-label="Página siguiente"
         >
           Siguiente
         </button>

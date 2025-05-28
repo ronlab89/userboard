@@ -1,15 +1,39 @@
-import RemoveUser from "@/icons/RemoveUser";
+/**
+ * DataTable
+ *
+ * Component responsible for rendering a paginated table of user data.
+ *
+ * Functionality:
+ * - Displays user details: First Name, Last Name, Email.
+ * - Supports pagination using `currentPage`, `rowsPerPage`, and `totalUsers` from the `pagination` store.
+ * - Calculates total pages dynamically on mount or when the `users` array changes.
+ * - Enables a delete action by opening a confirmation modal with user data.
+ *
+ * State Management:
+ * - `useUserStore`: Accesses the full list of users.
+ * - `usePaginationStore`: Handles current page, page size, total users, and calculates total pages.
+ * - `useToggleStore`: Manages modal state and the selected user for deletion.
+ *
+ * Components Used:
+ * - `RemoveUser`: Icon component for the delete action.
+ *
+ * Example Usage:
+ * ```tsx
+ * <DataTable />
+ * ```
+ */
+
+import { useEffect } from "react";
 import { usePaginationStore } from "@/store/pagination.store";
 import { useToggleStore } from "@/store/toogle.store";
 import { useUserStore } from "@/store/user.store";
-import { useEffect } from "react";
+import RemoveUser from "@/icons/RemoveUser";
 
 const DataTable = () => {
   const users = useUserStore((state) => state.users);
   const currentPage = usePaginationStore((state) => state.currentPage);
   const rowsPerPage = usePaginationStore((state) => state.rowsPerPage);
   const totalUsers = usePaginationStore((state) => state.totalUsers);
-  const totalPages = usePaginationStore((state) => state.totalPages);
   const setTotalPages = usePaginationStore((state) => state.setTotalPages);
   const setToggleModal = useToggleStore((state) => state.setToggleModal);
   const setModalType = useToggleStore((state) => state.setModalType);

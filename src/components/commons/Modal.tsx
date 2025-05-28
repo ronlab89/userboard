@@ -1,6 +1,37 @@
+/**
+ * Modal
+ *
+ * A reusable modal component for user interactions such as adding or deleting a user.
+ *
+ * Functionality:
+ * - Conditionally renders different content (`Form` or `Delete`) based on the current modal type.
+ * - Displays a dark translucent backdrop that closes when toggled off.
+ * - Contains a close button that resets the modal type and visibility state.
+ *
+ * State Management:
+ * - `useToggleStore`:
+ *   - `toggleModal`: Boolean state to show/hide the modal.
+ *   - `modalType`: String indicating which content to display (`add-user` or `delete-user`).
+ *   - `setToggleModal`: Function to toggle the modal visibility.
+ *   - `setModalType`: Function to reset the modal type.
+ *
+ * Components Used:
+ * - `Form`: Rendered when `modalType` is `"add-user"`.
+ * - `Delete`: Rendered when `modalType` is `"delete-user"`.
+ * - `Close`: Icon used for closing the modal.
+ *
+ * Accessibility:
+ * - Uses `aria-hidden` to indicate modal visibility for assistive technologies.
+ *
+ * Example Usage:
+ * ```tsx
+ * <Modal />
+ * ```
+ */
+
 import { useToggleStore } from "@/store/toogle.store";
-import Form from "./Form";
-import Delete from "./Delete";
+import Form from "@/components/commons/Form";
+import Delete from "@/components/commons/Delete";
 import Close from "@/icons/Close";
 
 const Modal = () => {
